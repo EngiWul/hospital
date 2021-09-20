@@ -14,15 +14,30 @@ def home():
         note = request.form.get('note')
 
         if len(note) < 1:
-            flash('Note is too short!', category='error')
+            flash('Запись слишком короткая!', category='error')
         else:
             new_note = Note(data=note, user_id=current_user.id)
             db.session.add(new_note)
             db.session.commit()
-            flash('Note added!', category='success')
+            flash('Запись добавлена!', category='success')
 
     return render_template("home.html", user=current_user)
 
+@views.route('/search', methods=['GET', 'POST'])
+@login_required
+def search():
+    # if request.method == 'POST':
+    #     note = request.form.get('note')
+
+    #     if len(note) < 1:
+    #         flash('Запись слишком короткая!', category='error')
+    #     else:
+    #         new_note = Note(data=note, user_id=current_user.id)
+    #         db.session.add(new_note)
+    #         db.session.commit()
+    #         flash('Запись добавлена!', category='success')
+    
+    return render_template("search.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():

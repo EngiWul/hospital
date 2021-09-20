@@ -17,13 +17,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash('Успешный логин!', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Неверный пароль, попробуйте снова.', category='error')
         else:
-            flash('Email does not exist.', category='error')
+            flash('Email не существует.', category='error')
 
     return render_template("login.html", user=current_user)
 
@@ -40,27 +40,35 @@ def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')
+        second_name = request.form.get('secondName')
+        third_name = request.form.get('thirdName')
+        iin = request.form.get('iin')
+        address = request.form.get('address')
+        phone_num = request.form.get('phone')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
         user = User.query.filter_by(email=email).first()
         if user:
-            flash('Email already exists.', category='error')
+            flash('Email уже существует.', category='error')
         elif len(email) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
+            flash('Email должен иметь больше 3 символов.', category='error')
         elif len(first_name) < 2:
-            flash('First name must be greater than 1 character.', category='error')
+            flash('Имя должно содержать больше 1 символа.', category='error')
         elif password1 != password2:
-            flash('Passwords don\'t match.', category='error')
+            flash('Пароли не совпадают.', category='error')
         elif len(password1) < 7:
-            flash('Password must be at least 7 characters.', category='error')
+            flash('Пароль должен состоять минимум из 7 символов.', category='error')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(
+            new_user = User(email=email, first_name=first_name, 
+            second_name=second_name, third_name=third_name, 
+            iin=iin, address=address, phone_num=phone_num,
+            password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
+            flash('Аккаунт создан!', category='success')
             return redirect(url_for('views.home'))
 
     return render_template("sign_up.html", user=current_user)
