@@ -23,7 +23,7 @@ def home():
 
     return render_template("home.html", user=current_user)
 
-@views.route('/search', methods=['GET', 'POST'])
+@views.route('/', methods=['GET', 'POST'])
 @login_required
 def search():
     # if request.method == 'POST':
