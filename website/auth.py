@@ -3,7 +3,7 @@ from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
-
+import re
 
 auth = Blueprint('auth', __name__)
 
@@ -59,6 +59,12 @@ def sign_up():
             flash('Пароли не совпадают.', category='error')
         elif len(password1) < 7:
             flash('Пароль должен состоять минимум из 7 символов.', category='error')
+        elif bool(re.search('/^\S+@\S+\.\S+$/', email)):
+            flash('Введите корректный email', category='error')
+        elif not bool(re.search('\d{12}', iin)) or bool(re.search('\d{13}', iin)):
+            flash('Некорректный ИИН', category='error')
+        elif not bool(re.search('\d{10}', phone_num)):
+            flash('Некорректный номер телефона', category='error')
         else:
             new_user = User(email=email, first_name=first_name, 
             second_name=second_name, third_name=third_name, 

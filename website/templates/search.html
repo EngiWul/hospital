@@ -1,14 +1,30 @@
 {% extends "base.html" %} {% block title %}Поиск пациента{% endblock %}
 {% block content %}
-    <div class="form-group">
-        <label for="search">Поиск</label>
-        <input
-          type="text"
-          class="form-control"
-          id="search"
-          name="search"
-          placeholder="Введите ИИН или имя для поиска пациента"
-        />
-      </div>
-
+<br \>
+      <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Фамилия</th>
+                <th scope="col">Отчество</th>
+                <th scope="col">Почта</th>
+                <th scope="col">ИИН</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Номер телефона</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                </tr>
+                {% endfor %}
+        </tbody>
+        </table>
     {% endblock %}

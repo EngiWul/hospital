@@ -14,7 +14,7 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-    <style>
+    <style type="text/css">
       .column {
         float: left;
         width: 50%;
@@ -44,8 +44,12 @@
         <div class="navbar-nav">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Главная</a>
-          <a class="nav-item nav-link" id="search" href="/search">Поиск пациента</a>
+          <!--a class="nav-item nav-link" id="search" href="/search">Поиск пациента</a-->
           <a class="nav-item nav-link" id="logout" href="/logout">Выйти</a>
+          <form action="/search" method="get">
+            <input autocomplete="off" autofocus name="search" placeholder="Поиск по ИИН или ФИО" type="text">
+            <input type="submit" value="Поиск пациента">
+          </form>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Логин</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Регистрация</a>

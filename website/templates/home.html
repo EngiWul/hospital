@@ -14,13 +14,22 @@
 <form method="POST">
   <div class="form-group">
         <label for="doc">Специалист</label>
-        <input
+        <!-- <input
           type="text"
           class="form-control"
           id="doc"
           name="doc"
           placeholder="Введите специалиста"
-        />
+        /> -->
+        <input list="docs" name="doc" /></label>
+    <datalist id="docs">
+      <option value="Лор">
+      <option value="Терапевт">
+      <option value="Кардиолог">
+      <option value="Педиатр">
+      <option value="Травматолог">
+      <option value="Стоматолог">
+    </datalist>
       </div>
   <div class="form-group">
         <label for="docfio">ФИО врача</label>
@@ -55,7 +64,7 @@
   <div class="form-group">
         <label for="date">Дата посещения</label>
         <input
-          type="text"
+          type="date"
           class="form-control"
           id="date"
           name="date"
