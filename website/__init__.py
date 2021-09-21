@@ -2,15 +2,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-
+import urllib
 db = SQLAlchemy()
 DB_NAME = "database.db"
-
+connStr = ('DRIVER={SQL Server Native Client 11.0};SERVER=localhost;DATABASE=efc;trusted_connection=yes')
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mssql:///{DB_NAME}'
+    params = urllib.parse.quote_plus(connStr)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc:///?odbc_connect={}'.format(params)
     db.init_app(app)
 
     from .views import views

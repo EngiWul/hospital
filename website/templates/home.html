@@ -1,21 +1,94 @@
-{% extends "base.html" %} {% block title %}Главная{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Главная{% endblock %}
+{% block content %}
 <h1 align="center">Записи</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
+<!--    <ul class="list-group list-group-flush" id="notes">-->
+<!--  {% for note in user.notes %}-->
+<!--  <li class="list-group-item">-->
+<!--    {{ note.data }}-->
+<!--    <button type="button" class="close" onClick="deleteNote({{ note.id }})">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </li>-->
+<!--  {% endfor %}-->
+<!--</ul>-->
 <form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
+  <div class="form-group">
+        <label for="doc">Специалист</label>
+        <input
+          type="text"
+          class="form-control"
+          id="doc"
+          name="doc"
+          placeholder="Введите специалиста"
+        />
+      </div>
+  <div class="form-group">
+        <label for="docfio">ФИО врача</label>
+        <input
+          type="text"
+          class="form-control"
+          id="docfio"
+          name="docfio"
+          placeholder="Введите ФИО врача"
+        />
+      </div>
+  <div class="form-group">
+        <label for="diagnoz">Диагноз</label>
+        <input
+          type="text"
+          class="form-control"
+          id="diagnoz"
+          name="diagnoz"
+          placeholder="Введите диагноз"
+        />
+      </div>
+  <div class="form-group">
+        <label for="zhaloby">Жалобы</label>
+        <input
+          type="text"
+          class="form-control"
+          id="zhaloby"
+          name="zhaloby"
+          placeholder="Введите жалобу пациента"
+        />
+      </div>
+  <div class="form-group">
+        <label for="date">Дата посещения</label>
+        <input
+          type="text"
+          class="form-control"
+          id="date"
+          name="date"
+          placeholder="Введите дату в формате dd.mm.yyyy (например 01.01.2001)"
+        />
+      </div>
   <br />
   <div align="center">
     <button type="submit" class="btn btn-primary">Добавить запись</button>
   </div>
 </form>
+<br />
+<table class="table table-hover table-dark">
+<thead>
+    <tr>
+        <th scope="col">Специалист</th>
+        <th scope="col">ФИО врача</th>
+        <th scope="col">Диагноз</th>
+        <th scope="col">Жалобы</th>
+        <th scope="col">Дата посещения</th>
+    </tr>
+</thead>
+<tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{item[0]}}</td>
+            <td>{{item[1]}}</td>
+            <td>{{item[2]}}</td>
+            <td>{{item[3]}}</td>
+            <td>{{item[4]}}</td>
+        </tr>
+        {% endfor %}
+</tbody>
+</table>
+
 {% endblock %}
